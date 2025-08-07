@@ -34,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -62,16 +66,13 @@ dependencies {
     implementation("androidx.room:room-ktx:2.7.2")
     androidTestImplementation("androidx.room:room-testing:2.7.2")
 
-    // 🔄 Lifecycle (ViewModel, LiveData, etc.)
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.9.2")
+    // 🔄 Lifecycle (ViewModel, LiveData, Runtime)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.9.2")
 
-    // ☕ Kotlin Core + Coroutines
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.0")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-
-    // 🔗 DataBinding Compiler
-    kapt("com.android.databinding:compiler:3.2.0-alpha10")
+    // ☕ Kotlin Coroutines (stdlib is auto-added via plugin)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }
