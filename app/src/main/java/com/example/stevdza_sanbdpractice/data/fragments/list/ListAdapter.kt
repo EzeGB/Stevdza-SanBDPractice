@@ -29,7 +29,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.binding.idText.text = currentUser.id.toString()
         holder.binding.firstnameText.text = currentUser.firstName
         holder.binding.lastnameText.text = currentUser.lastName
-        holder.binding.ageText.text = currentUser.age.toString()
+        holder.binding.ageText.text = "(${currentUser.age})"
     }
 
     override fun getItemCount(): Int {
