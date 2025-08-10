@@ -36,8 +36,8 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         return userList.size
     }
 
-    fun setData(user: List<User>){
-        this.userList = user
+    fun setData(users: List<User>){
+        this.userList = users
         notifyDataSetChanged()
     }
 
