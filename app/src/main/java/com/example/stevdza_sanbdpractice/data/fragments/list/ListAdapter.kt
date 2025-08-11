@@ -2,9 +2,11 @@ package com.example.stevdza_sanbdpractice.data.fragments.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stevdza_sanbdpractice.data.models.User
 import com.example.stevdza_sanbdpractice.databinding.CustomRowBinding
+import androidx.navigation.findNavController
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
@@ -30,6 +32,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.binding.firstnameText.text = currentUser.firstName
         holder.binding.lastnameText.text = currentUser.lastName
         holder.binding.ageText.text = "(${currentUser.age})"
+
+        holder.binding.rowLayout.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentUser)
+            holder.binding.rowLayout.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
