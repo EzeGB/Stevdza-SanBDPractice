@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.stevdza_sanbdpractice.R
-import com.example.stevdza_sanbdpractice.data.User
-import com.example.stevdza_sanbdpractice.data.UserViewModel
+import com.example.stevdza_sanbdpractice.data.models.User
+import com.example.stevdza_sanbdpractice.data.viewmodels.UserViewModel
 import com.example.stevdza_sanbdpractice.databinding.FragmentAddBinding
 import com.example.stevdza_sanbdpractice.databinding.FragmentListBinding
 

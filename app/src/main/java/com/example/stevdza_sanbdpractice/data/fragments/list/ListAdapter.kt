@@ -3,7 +3,7 @@ package com.example.stevdza_sanbdpractice.data.fragments.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stevdza_sanbdpractice.data.User
+import com.example.stevdza_sanbdpractice.data.models.User
 import com.example.stevdza_sanbdpractice.databinding.CustomRowBinding
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {

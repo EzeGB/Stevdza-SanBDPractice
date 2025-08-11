@@ -1,4 +1,4 @@
-package com.example.stevdza_sanbdpractice.data
+package com.example.stevdza_sanbdpractice.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
