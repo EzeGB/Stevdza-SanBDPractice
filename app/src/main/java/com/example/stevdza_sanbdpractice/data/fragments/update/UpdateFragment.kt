@@ -59,11 +59,13 @@ class UpdateFragment : Fragment() {
     private fun updateUser(){
         val firstName = binding.updateFirstNameEt.text.toString()
         val lastName = binding.updateLastNameEt.text.toString()
-        val age = Integer.parseInt(binding.updateAgeEt.text.toString())
+        val age = binding.updateAgeEt.text.toString()
 
-        if (inputCheck(firstName,lastName, binding.updateAgeEt.text)){
+        if (inputCheck(firstName,lastName,age)){
             //Create User Object
-            val updatedUser = User(args.currentUser.id,firstName,lastName,age)
+            val updatedUser = User(args.currentUser.id,
+                firstName,lastName,
+                Integer.parseInt(age))
             // Update current user
             mUserViewModel.updateUser(updatedUser)
             Toast.makeText(requireContext(),"Successfully updated!", Toast.LENGTH_LONG).show()
@@ -74,7 +76,9 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean{
-        return !(firstName=="" &&lastName=="" && age.isEmpty())
+    private fun inputCheck(firstName: String, lastName: String, age: String): Boolean{
+        return !(TextUtils.isEmpty(firstName)||
+                TextUtils.isEmpty(lastName) ||
+                TextUtils.isEmpty(age))
     }
 }

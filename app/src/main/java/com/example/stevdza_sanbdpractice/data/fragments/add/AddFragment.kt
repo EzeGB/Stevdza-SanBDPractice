@@ -50,11 +50,14 @@ class AddFragment : Fragment() {
     private fun insertDataToDatabase(){
         val firstName = binding.editFirstNameEt.text.toString()
         val lastName = binding.editLastNameEt.text.toString()
-        val age = binding.editAgeEt.text
+        val age = binding.editAgeEt.text.toString()
 
         if(inputCheck(firstName,lastName,age)){
             //Create User Object
-            val user = User(0,firstName,lastName,Integer.parseInt(age.toString()))
+            val user = User(0,
+                firstName,
+                lastName,
+                Integer.parseInt(age))
             //Add Data to the Database
             mUserViewModel.addUser(user)
             Toast.makeText(requireContext(),"Successfully added!", Toast.LENGTH_LONG).show()
@@ -65,7 +68,9 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean{
-        return !(TextUtils.isEmpty(firstName)&&TextUtils.isEmpty(lastName) && age.isEmpty())
+    private fun inputCheck(firstName: String, lastName: String, age: String): Boolean{
+        return !(TextUtils.isEmpty(firstName)||
+                TextUtils.isEmpty(lastName) ||
+                TextUtils.isEmpty(age))
     }
 }
