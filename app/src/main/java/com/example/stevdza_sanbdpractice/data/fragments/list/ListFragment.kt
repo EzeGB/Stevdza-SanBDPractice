@@ -25,7 +25,9 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         //Inflate layout for this fragment
-        _binding = FragmentListBinding.inflate(inflater,container,false)
+        _binding = FragmentListBinding.inflate(inflater,
+            container,
+            false)
 
         // Recyclerview
         val adapter = ListAdapter()
