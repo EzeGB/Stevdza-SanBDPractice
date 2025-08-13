@@ -5,9 +5,16 @@ import android.text.Editable
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -46,6 +53,9 @@ class UpdateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val menuHost : MenuHost = requireActivity()
+        setUpMenuHost(menuHost)
+
         binding.updateBtn.setOnClickListener {
             updateUser()
         }
@@ -54,6 +64,26 @@ class UpdateFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun setUpMenuHost(menuHost: MenuHost){
+        menuHost.addMenuProvider(object : MenuProvider{
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.delete_menu,menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId ){
+                    R.id.menu_delete -> {
+                        deleteUser()
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun updateUser(){
@@ -80,5 +110,26 @@ class UpdateFragment : Fragment() {
         return !(TextUtils.isEmpty(firstName)||
                 TextUtils.isEmpty(lastName) ||
                 TextUtils.isEmpty(age))
+    }
+
+    private fun deleteUser(){
+        val currentFirstName = args.currentUser.firstName
+        val builder = AlertDialog.Builder(requireContext())
+        builder.apply {
+            setTitle("Delete $currentFirstName?")
+            setMessage("Are you sure you want to delete $currentFirstName?")
+            setPositiveButton("Yes") {_,_ ->
+                mUserViewModel.deleteUser(args.currentUser)
+
+                Toast.makeText(requireContext(),
+                    "Successfully removed: $currentFirstName",
+                    Toast.LENGTH_LONG).show()
+
+                findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            }
+            setNegativeButton("No"){_,_ ->}
+            create()
+            show()
+        }
     }
 }
